@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NorthwindBackend.DataAccessLayer\NorthwindBackend.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\NorthwindBackend.EntityLayer\NorthwindBackend.EntityLayer.csproj" />
+  </ItemGroup>
+
+</Project>
