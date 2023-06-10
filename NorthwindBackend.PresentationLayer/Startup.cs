@@ -8,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using NorthwindBackend.CoreLayer.DependencyResolvers;
+using NorthwindBackend.CoreLayer.Extensions;
+using NorthwindBackend.CoreLayer.Utilities.IoC;
 using NorthwindBackend.CoreLayer.Utilities.Security.Encryption;
 using NorthwindBackend.CoreLayer.Utilities.Security.Jwt;
 using System;
@@ -50,6 +53,11 @@ namespace NorthwindBackend.PresentationLayer
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
+
+            services.AddDependencyResolvers(new ICoreModule[]
+            {
+                new CoreModule()
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +67,8 @@ namespace NorthwindBackend.PresentationLayer
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.ConfigureCustomExceptionMiddleware();
 
             app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader());
 

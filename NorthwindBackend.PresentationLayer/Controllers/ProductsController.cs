@@ -18,7 +18,6 @@ namespace NorthwindBackend.PresentationLayer.Controllers
         }
 
         [HttpGet("getall")]
-        [Authorize(Roles = "Product.List")]
         public IActionResult GetList()
         {
             var result = _productService.GetList();
@@ -77,6 +76,17 @@ namespace NorthwindBackend.PresentationLayer.Controllers
         public IActionResult UpdateProduct(Product product)
         {
             var result = _productService.Update(product);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
+        }
+
+        [HttpPost("transaction")]
+        public IActionResult TransactionTest(Product product)
+        {
+            var result = _productService.TransactionalOperation(product);
             if (result.Success)
             {
                 return Ok(result.Message);

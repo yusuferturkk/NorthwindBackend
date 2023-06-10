@@ -14,5 +14,7 @@ namespace NorthwindBackend.BusinessLayer.Abstract
         IDataResult<Product> GetById(int id);
         IDataResult<List<Product>> GetList();
         IDataResult<List<Product>> GetListByCategoryId(int categoryId);
+
+        IResult TransactionalOperation(Product product);
     }
 }
